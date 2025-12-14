@@ -1,0 +1,595 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{ulem}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{sectsty} 
+\usepackage[margin=3.5cm]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage[parfill]{parskip}
+\usepackage{minted}
+\usepackage{tcolorbox}
+\usepackage{verbatim}
+\usepackage{lmodern} 
+
+\usepackage{url}    
+\usepackage{hyperref}
+
+\tcbuselibrary{listings, minted}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\nouppercase{\leftmark}} 
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+\setlength{\topmargin}{-1cm} 
+\setlength{\headsep}{1cm}
+\fancyfoot[C]{\thepage}
+
+\sectionfont{\fontsize{20}{24}\selectfont} 
+\subsectionfont{\fontsize{18}{22}\selectfont} 
+\subsubsectionfont{\fontsize{16}{20}\selectfont} 
+\numberwithin{equation}{section}
+\setlength{\parindent}{0pt}
+
+\pagenumbering{arabic}
+\begin{document}
+\sloppy
+\begin{titlepage}
+\begin{center}
+\vspace*{-0.5cm}
+\includegraphics[height=20mm]{usthb.jpg}\\[0.7cm]
+\textsc{{\Large République Algérienne Démocratique et Populaire}}\\[0.2cm] 
+{\Large Ministère de L'Enseignement Supérieur et de la Recherche Scientifique}\\[0.35cm]
+{\Large  Université des Sciences et de la Technologie HOUARI BOUMEDIENE}\\[0.4cm]
+{\Large Faculté de math\'ematiques}\\[0.4cm]
+\Large {\textbf{Thème}}\\[-0.3cm]
+{\Huge \bfseries\fbox{\parbox[t][7em][c]{\textwidth}{\centering Utilisation des Technologies de l’Information et de la Communication pour la modélisation et la diffusion des résultats d’une équation aux dérivées partielles}}}\\[0.15cm]
+
+\textsc{\Large Projet par:}\\[0.15cm]
+\textsc{\Large}\\[0.15cm]
+
+\begin{center}
+   \begin{minipage}{0.5\textwidth}
+        \centering
+        GUERNANE Imene\\
+       ZIOUCHE Tiziri\\
+    \end{minipage}
+    \end{center}
+\textsc{\Large}\\[0.15cm]
+\Large{ \ Encadré par: M.BOUKAROU Aissa}\\
+\end{center}
+\end{titlepage}
+
+
+\clearpage
+\section*{Résumé}
+\thispagestyle{plain}
+Ce travail s’inscrit dans le cadre du module « Technologies de l’Information et de la Communication » et porte sur l’application des outils numériques pour la modélisation et la résolution d’une équation aux dérivées partielles (EDP). Nous nous sommes intéressés à l’équation de la chaleur, un modèle fondamental décrivant la diffusion thermique dans un milieu donné.
+
+L’objectif principal de ce projet est de présenter certaines TIC et montrer comment elles peuvent être mobilisées pour simuler un phénomène physique réel, visualiser son évolution dans le temps et diffuser les résultats sous une forme scientifique numérique. Pour ce faire, nous avons utilisé MATLAB pour l’implémentation numérique du schéma explicite basé sur la méthode des différences finies. Ce choix a permis de discrétiser l’équation et d’obtenir une approximation de l’évolution de la température.
+
+Les résultats obtenus ont été présentés graphiquement, montrant la diminution progressive de la chaleur jusqu’à atteindre un état d’équilibre. Une étude de l'erreur commise à été effectué. Le travail a ensuite été structuré et rédigé avec LaTeX afin d’assurer une présentation scientifique rigoureuse à travers le PDF interactif ainsi qu'une présentation Beamer, tandis que GitHub a été utilisé pour l’organisation et la publication du code et des fichiers du projet, favorisant ainsi le partage et la reproductibilité des simulations.%ICI
+
+Ce projet met en évidence l’efficacité des outils TIC dans la résolution numérique des EDP, en particulier MATLAB comme outil de programmation numérique et GitHub comme outil de partage de l'information.%ICI
+
+\textbf{Mots-clés} : TIC, Équation de la Chaleur, MATLAB, LaTeX, GitHub, Overleaf, Différences Finies, Simulation Numérique. %ICI
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{téléchargement.png} 
+    
+\end{figure}
+
+
+\clearpage
+\renewcommand{\contentsname}{Table des matières}
+\tableofcontents
+\label{sec:TOC}
+\thispagestyle{plain}
+
+
+\clearpage
+
+\newpage
+
+\thispagestyle{plain}
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+Les Technologies de l’Information et de la Communication (TIC) occupent aujourd’hui une place essentielle dans le développement scientifique et technologique. Grâce à leur évolution rapide, elles ont transformé les méthodes d’analyse, de calcul, de modélisation et de diffusion des connaissances dans différents domaines, en particulier en mathématiques appliquées et en physique. Là où les calculs analytiques étaient autrefois longs, complexes ou parfois impossibles à établir, l’usage des outils numériques permet désormais de simuler, visualiser et interpréter des phénomènes réels avec précision et efficacité.
+
+Parmi les domaines les plus concernés par l’intégration du numérique figure l’étude des équations aux dérivées partielles (EDP). Ces équations interviennent dans la modélisation d’un grand nombre de phénomènes naturels tels que la propagation de la chaleur, le mouvement des fluides ou encore la diffusion d'une onde. Leur résolution analytique n’étant pas toujours accessible, l’approche numérique s’impose comme une alternative puissante permettant d’obtenir des approximations fiables et exploitables.
+
+L’objectif principal de ce projet est de démontrer comment les TIC peuvent être mobilisées pour modéliser un phénomène physique, simuler son évolution temporelle, analyser les résultats obtenus et en assurer la diffusion scientifique. 
+
+Dans ce cadre, \textit{LaTeX} a été utilisé pour la rédaction professionnelle du rapport tandis que \textit{GitHub} a servi d’espace numérique pour l’organisation et le stockage du code source, permettant transparence, partage et reproductibilité. La plateforme numérique \textit{Overleaf} à été utilisé pour la collaboration scientifique.
+
+Ce travail s’intéresse à l’équation de la chaleur, un modèle fondamental en thermodynamique qui décrit la diffusion de la température dans un milieu au cours du temps. 
+
+Nous proposons une résolution numérique de cette équation à l’aide de la méthode des différences finies, puis une simulation complète sous \textit{MATLAB}, choisi pour ses performances dans le calcul scientifique et la visualisation graphique.
+
+Ce travail s’inscrit donc dans une démarche à la fois théorique et numérique, visant à relier les bases mathématiques des EDP à leur mise en œuvre informatique.
+
+
+\clearpage
+
+\section{Technologies de l'Information et de la Communication (TIC)}
+
+\subsection{Introduction aux TIC}
+
+Les Technologies de l’Information et de la Communication (TIC) regroupent l’ensemble des outils, logiciels, plateformes et méthodes permettant de produire, traiter, analyser, stocker et partager l’information sous toutes ses formes.  
+Elles jouent aujourd’hui un rôle fondamental dans l’enseignement supérieur, la recherche scientifique, l’ingénierie, et particulièrement dans la modélisation numérique des phénomènes physiques.  
+Les TIC facilitent l’accès à l’information, améliorent la qualité du travail collaboratif, et permettent de réaliser des simulations complexes dans des environnements spécialisés.\cite{TIC_LocalGlobal}
+
+\subsection{Outils de résolution numérique}
+
+Les outils de résolution numérique sont indispensables pour traiter les équations aux dérivées partielles, effectuer des simulations, analyser des données ou visualiser des phénomènes physiques. Parmi les plus utilisés :
+
+\subsubsection{MATLAB} %ICI
+MATLAB est un environnement de calcul numérique largement utilisé dans l’ingénierie et les sciences appliquées.  
+Son utilité dans les EDP réside dans sa capacité à implémenter facilement des schémas numériques (différences finies, éléments finis, etc.) et à produire des graphiques clairs et précis.\cite{MathWorksSolutions}
+
+\subsubsection{Python}
+Python est un langage open-source très populaire grâce à sa flexibilité et à la richesse de ses bibliothèques scientifiques (NumPy, SciPy, Matplotlib).  
+Dans le cadre des EDP, Python permet de coder rapidement des méthodes numériques et d’obtenir des solutions évolutives et personnalisables.  
+Il constitue une alternative gratuite et très performante à MATLAB.\cite{PythonAbout}
+
+\subsubsection{GeoGebra}
+GeoGebra est un outil interactif permettant la visualisation géométrique et mathématique.  
+Bien que moins utilisé pour des simulations avancées, il sert à illustrer des concepts liés aux EDP, aux conditions limites, ou à la propagation d’une solution.\cite{GeoGebraHome}
+
+\subsubsection{Jupyter Notebook}
+Jupyter Notebook permet d’exécuter du code Python dans un environnement interactif.  
+Il est largement utilisé pour structurer des calculs, documenter les étapes de résolution et partager les résultats sous forme de blocs combinant texte, équations et graphiques.  
+C’est un outil idéal pour l’enseignement et la démonstration de méthodes numériques.\cite{JupyterAbout}
+
+\subsection{Outils de collaboration scientifique}
+
+Ces outils facilitent le travail à distance, le partage de documents scientifiques et la gestion des références bibliographiques.
+
+\subsubsection{Overleaf}
+Overleaf est une plateforme en ligne dédiée à l’édition de documents LaTeX.  
+Elle permet un travail collaboratif en temps réel, ce qui facilite la rédaction de rapports, d’articles ou de mémoires scientifiques.\cite{OverleafFeatures}
+
+\subsubsection{Google Colab}
+Google Colab est un environnement cloud permettant d'exécuter du code Python sans installation locale.  
+Il est utilisé pour les calculs, les simulations et le partage des notebooks entre étudiants et chercheurs.\cite{GoogleColab}
+
+\subsubsection{Zotero}
+Zotero est un logiciel de gestion bibliographique permettant de collecter, organiser et citer automatiquement les références dans un document LaTeX, Word ou autres.\cite{ZoteroHome}
+
+\subsection{Espaces numériques de travail}
+
+\subsubsection{GitHub}
+GitHub est une plateforme de gestion de versions utilisée pour stocker, partager et collaborer sur des projets informatiques. 
+Dans le cadre des EDP et des simulations numériques, GitHub permet de sauvegarder le code MATLAB/Python, suivre les modifications et travailler efficacement en groupe.\cite{WhyGitHub}
+
+\subsection{Outils de présentation}
+
+\subsubsection{PDF}
+Le format PDF est le standard de diffusion scientifique. Il garantit une mise en page fixe et une compatibilité universelle.
+
+\subsubsection{LaTeX interactif}
+Le LaTeX interactif permet d’intégrer des animations, des graphiques dynamiques ou des résultats numériques interactifs dans des documents PDF avancés.
+
+\subsubsection{Beamer}
+Beamer est une classe LaTeX permettant de créer des présentations professionnelles.  
+Il est très apprécié dans les conférences scientifiques pour sa capacité à intégrer des équations et des figures complexes.
+
+\subsubsection{PowerPoint}
+PowerPoint reste un outil populaire pour les présentations classiques.  
+Il est simple à utiliser et permet de créer des supports visuels rapides et efficaces.
+
+\subsubsection{Canva}
+Canva est une plateforme de design en ligne permettant de créer des présentations modernes et esthétiques.  
+Elle est utile pour concevoir des affiches scientifiques, posters et diapositives à forte dimension visuelle.\cite{CanvaFeatures}
+
+\subsection{Intérêt des TIC dans la recherche scientifique}
+
+Les TIC occupent une place centrale dans la recherche moderne. Leur intérêt peut être résumé en plusieurs points :
+
+\begin{itemize}
+    \item \textbf{Accès rapide à l’information scientifique} telle que des bases de données, articles, revues ou résultats de recherche.
+    \item \textbf{Automatisation des calculs complexes} grâce aux outils numériques.
+    \item \textbf{Collaboration facilitée} entre chercheurs via des plateformes en ligne.
+    \item \textbf{Amélioration de la qualité de présentation} des rapports, articles et communications scientifiques.
+    \item \textbf{Reproductibilité} des résultats grâce à la diffusion du code et des données.
+\end{itemize}
+
+\subsubsection{Importance des TIC dans l’étude et la résolution des EDP}
+Les équations aux dérivées partielles nécessitent souvent une résolution numérique, car les solutions analytiques ne sont disponibles que dans des cas simples.  
+Les TIC interviennent alors à plusieurs niveaux :
+
+\begin{itemize}
+    \item \textbf{Implémentation des méthodes numériques} telles que les différences finies, éléments finis ou volumes finis.
+    \item \textbf{Simulation rapide de modèles physiques complexes}, comme la diffusion thermique ou la dynamique des fluides.
+    \item \textbf{Visualisation graphique des solutions numériques} soit courbes, surfaces ou animations 2D/3D.
+    \item \textbf{Gestion et stockage des projets de simulation} via des plateformes collaboratives telles que GitHub.
+    \item \textbf{Documentation structurée} des modèles et résultats via LaTeX, Jupyter Notebook ou Overleaf.
+\end{itemize}
+
+Ces apports font des TIC un élément incontournable dans toute étude moderne portant sur les EDP, en facilitant aussi bien le calcul que la présentation et le partage des résultats.
+
+
+
+\section{Étude de l'équation de la chaleur: cadre théorique}
+
+On se propose dans cette partie de présenter l'équation de la chaleur dans le cadre théorique, pour ensuite l'étudier par une approche numérique et comparer les résultats et évaluer l'erreur commise.
+
+L’équation de la chaleur a été choisie pour plusieurs raisons :
+
+\begin{itemize}
+    \item Le modèle physique associé à cette équation est simple mais très riche mathématiquement, il permet d’illustrer clairement les notions fondamentales des EDP;    
+    \item L'équation est facile à simuler numériquement sous MATLAB;  
+    \item Sa structure parabolique se prête bien aux méthodes numériques comme la méthode des différences finies;    
+    \item Cette équation présente dans de nombreuses applications industrielles, comme l'étude du refroidissement de matériaux métalliques, conduction thermique dans les bâtiments, électronique, thermique biomédicale, etc.
+\end{itemize}
+
+\subsection{Position du problème}
+
+On considère l'équation de la chaleur sur l'intervalle $[0,L]$, avec un coefficient de diffusivité thermique $\alpha>0$. %ICI
+On cherche une fonction $u(x,t)$ telle que
+$$
+\begin{cases}
+u_t(x,t)=\alpha\,u_{xx}(x,t), & x\in[0,L],\; t>0, \\[4pt]
+u(0,t)=0,\quad u(L,t)=0, & t\ge 0, \\[4pt]
+u(x,0)=f(x), & x\in[0,L].
+\end{cases}   
+$$
+
+Cette équation représente un phénomène de diffusion progressive de la chaleur dans une barre de longueur $L$, d'extrémités non chauffés ou de température constante considéré nulle, et de température $f(x)$ au temps $t=0$.\cite{MemoireChaleur} %ICI
+
+\subsection{Solution formelle}
+
+La solution analytique classique, obtenue par séparation des variables, s’écrit sous forme de série de Fourier :
+\[
+u(x,t) = \sum_{n=1}^{\infty} B_n \sin\left(\frac{n\pi x}{L}\right)
+\exp\left(-\alpha \left(\frac{n\pi}{L}\right)^2 t\right)
+\]
+
+où les coefficients $B_n$ sont calculés à partir de la condition initiale $f(x)$ :
+\[
+B_n = \frac{2}{L} \int_0^L f(x)\sin\left(\frac{n\pi x}{L}\right)\,dx
+\]
+\cite{MemoireChaleur}
+\pagebreak
+\section{Étude de l'équation de la chaleur: approche numérique}
+La résolution analytique des équations aux dérivées partielles, et en particulier de l’équation de la chaleur, n’est pas toujours possible ou peut s’avérer trop complexe selon les conditions imposées. D’où la nécessité d’adopter des méthodes numériques permettant d’obtenir une solution approchée mais exploitable. Parmi ces méthodes, la \textbf{méthode des différences finies} constitue l’approche la plus utilisée pour sa simplicité et son efficacité.
+\subsection{Présentation de la méthode numérique: méthode des différences finies}
+
+La méthode des différences finies consiste à approximer les dérivées d’une fonction continue par des expressions discrètes basées sur des points de grille régulièrement espacés. Le domaine spatial $[0,L]$ est divisé en $N$ sous-intervalles de longueur :
+\[
+\Delta x = \frac{L}{N}
+\]
+
+De même, l’intervalle temporel $[0,T]$ est discrétisé en pas de temps réguliers $\Delta t$.
+
+La dérivée partielle temporelle et la dérivée seconde spatiale sont approximées respectivement par :
+\[
+\frac{\partial u}{\partial t} \approx \frac{u_i^{n+1}-u_i^n}{\Delta t}, \qquad 
+\]
+\[
+\frac{\partial^2 u}{\partial x^2} \approx \frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{(\Delta x)^2}.
+\]
+
+Qui constituent les approximations du schéma FTCS (forward time-centered space). En substituant ces approximations dans l’équation de la chaleur on obtient l'équation:%ICI
+\[
+\begin{cases}
+\frac{u_i^{n+1}-u_i^n}{\Delta t} = \alpha
+\frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{(\Delta x)^2},\\[4pt]
+u_i^0 = f(x_i),\\[4pt]
+u_0^n = u(0,t_n), & u_N^n = u(L,t_n).\\[4pt]
+\end{cases}
+\]
+Où:
+\[
+x_i = i\Delta x, \qquad i=0,1,\dots,N
+\]
+\[
+\\t_n = n\Delta t, \qquad n=0,1,\dots,N
+\]
+sont les mailles issues de la discrétisation du domaine, et:
+\[
+u_i^n = u(x_i, t_n)
+\]
+est la fonction $u$ en $x_i$ au temps $t_n$, et:
+\[
+u_i^0 = f(x_i)
+\]
+est la condition initiale, et: 
+\[
+u_0^n = u(0,t_n),\qquad u_N^n = u(L,t_n)
+\]
+sont les conditions aux limites.
+
+Le choix de $N$ doit respecter la condition de stabilité du schéma FTCS, étant que le coefficient:
+\[
+r = \frac{\alpha\, dt}{dx^2}
+\]
+reste strictement inférieur à $0{,}5$ pour toutes les simulations, garantissant ainsi la stabilité de la méthode.\cite{FDM_Chaleur}
+
+\pagebreak
+
+\subsection{Simulation sous MATLAB}
+Cette partie regroupe principalement les codes utilisées en MATLAB pour l'étude de notre equation. On présente le code de la solution exacte qui sera gardé comme référence, puis celui de la solution approchée par la méthode des différences finies. Dans la section suivantes les deux résultats serons comparés.
+
+\subsubsection{Solution Exacte}
+\label{sec:codeexc}
+Le code MATLAB pour obtenir un graphe de la solution exacte est le suivant:
+\begin{tcolorbox}[title={Code MATLAB – Solution Exacte}, colback=gray!5, colframe=black,boxsep=5mm] 
+   
+\begin{minted}[fontsize=\small, linenos]{matlab}
+% --- Solution exacte de l'équation de la chaleur ---
+
+clear; clc; close all;
+
+% Paramètres
+L = 1;
+alpha = 0.01;
+
+% Discrétisation
+N = 200;               % pour un plot lisse
+x = linspace(0, L, N);
+
+% Temps à visualiser
+T = 0.5;
+
+% Solution exacte
+u_exact = exp(-alpha*pi^2*T) .* sin(pi*x);
+
+% Plot
+figure;
+plot(x, u_exact, 'LineWidth', 2);
+xlabel('Position x');
+ylabel('u_{exact}(x,t)');
+title(sprintf('Solution exacte à t = %.2f s', T));
+grid on;
+\end{minted}
+\end{tcolorbox}
+\newpage
+\subsubsection{Solution approchée : Schéma explicite}
+Le code MATLAB donnant une approximation de la solution par la méthode choisie est le suivant:
+\label{sec:codeapr}
+\begin{tcolorbox}[title={Code MATLAB –Solution approchée : Schéma explicite}, colback=gray!5, colframe=black,boxsep=5mm] 
+   
+\begin{minted}[fontsize=\small, linenos]{matlab}
+clear; clc; close all;
+% Paramètres
+L = 1;
+N = 50;
+dx = L/N;
+x = 0:dx:L;
+T = 0.5;
+dt = 0.0005;
+alpha = 0.01;
+
+% Stabilité
+r = alpha * dt / dx^2;
+
+% Condition initiale
+u = sin(pi*x);
+u_new = u;
+
+% Conditions limites
+u(1) = 0; 
+u(end) = 0;
+
+% Boucle temporelle
+for t = 0:dt:T
+    for i = 2:N
+        u_new(i) = u(i) + r*(u(i+1) - 2*u(i) + u(i-1));
+    end
+    u = u_new;
+end
+
+% Plot final
+figure;
+plot(x, u, 'LineWidth', 2);
+xlabel('Position x');
+ylabel('u_{approchée}(x,T)');
+title(sprintf('Solution approchée à t=%.2f s', T));
+grid on;
+\end{minted}
+\end{tcolorbox}
+\newpage
+Ce code permet de visualiser les deux résultats en même temps à but de comparaison:\label{sec:codelesdeux}
+\begin{tcolorbox}[title={Code MATLAB –Plot Exact vs Approché}, colback=gray!5, colframe=black,boxsep=5mm] 
+\begin{minted}[fontsize=\small, linenos]{matlab}
+clear; clc; close all;
+
+% Paramètres
+L = 1;
+N = 50;
+dx = L/N;
+x = 0:dx:L;
+T = 0.5;
+dt = 0.0005;
+alpha = 0.01;
+
+% Stabilité
+r = alpha * dt / dx^2;
+
+% --- Solution approchée ---
+u = sin(pi*x);
+u_new = u;
+u(1) = 0; 
+u(end) = 0;
+
+for t = 0:dt:T
+    for i = 2:N
+        u_new(i) = u(i) + r * (u(i+1) - 2*u(i) + u(i-1));
+    end
+    u = u_new;
+end
+
+u_exact = exp(-alpha*pi^2*T) .* sin(pi*x);
+
+% --- Plot comparatif ---
+figure;
+plot(x, u, 'b', 'LineWidth', 2); hold on;
+plot(x, u_exact, 'r--', 'LineWidth', 2);
+legend('Solution approchée', 'Solution exacte');
+xlabel('Position x');
+ylabel('Température');
+title('Comparaison entre la solution exacte et la solution approchée');
+grid on;
+\end{minted}
+\end{tcolorbox}
+\cite{MathWorksNumericalMethods}
+\pagebreak
+\subsection{Interprétation des résultats}
+\subsubsection{Visualisation des solutions}
+\label{sec:VDS}
+
+En éxécutant \hyperref[sec:codeexc]{\textcolor{blue}{ce code}}, on obtient le graphe de la solution exacte:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.9]{sol ext.png} 
+    \caption{Solution exacte de l'équation de la chaleur en 1D}
+    \label{fig:im1}
+\end{figure}
+En un temps fixé très proche de $t=0$, la solution de présente une allure parabolique le long de l’axe spatial $x$. La température est nulle aux extrémités du domaine, tandis qu’elle atteint un maximum au centre du segment. Au cours du temps, cette courbe s’aplatit : l’amplitude de la température décroît jusqu’à tendre vers zéro, traduisant la dissipation de la chaleur aux extrémités.
+
+\pagebreak
+En exécutant \hyperref[sec:codeapr]{\textcolor{blue}{ce code}}, on obtient le graphe de la solution approchée:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{sol approché.png} 
+    \caption{Solution approchée de l'équation de la chaleur en 1D}
+    \label{fig:im2}
+\end{figure}
+\\
+A première vu, la courbe de la solution approchée parait identique à celle de la solution exacte. On obtient la chaleur nulle au bords grâce à la condition de Dirichlet homogène programmées dans le code, ainsi que l'allure parabolique et croissance de la chaleur jusqu'à atteinte du maximum avant la dissipation finale de la chaleur en se rapprochant du bord $x=L$. En superposant les deux solutions, on trouvera qu'elle sont bien suffisamment proche l'une de l'autre pour être considérées confondues.
+\pagebreak
+En éxécutant \hyperref[sec:codelesdeux]{\textcolor{blue}{ce code}}, on obtient les deux graphe superposées l'un sur l'autre.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{comparaison.png} 
+    \caption{Comparaison des solutions}
+    \label{fig:im3}
+\end{figure}
+
+
+
+Il est clair a première vu que la solution approchée est très proche de la solution exacte. On obtiendras dans la section suivante une estimation numérique de l'erreur qui permet de conclure sur l’efficacité de l'approximation.
+
+\pagebreak
+\subsubsection{Estimation de l’erreur numérique}
+
+Afin d'évaluer la précision du schéma explicite utilisé pour la résolution numérique de l’équation de la chaleur, nous avons comparé la solution approchée obtenue sous MATLAB à la solution analytique. Les mesures d'erreur $L_2$ et $L^{\infty}$ on été considérées.
+
+Le code d'estimation d'erreur est le suivant:
+\begin{tcolorbox}[title={Code MATLAB – Estimation de l'erreur}, colback=gray!5, colframe=black,boxsep=5mm] 
+\begin{minted}[fontsize=\small, linenos]{matlab}
+% Erreur ponctuelle
+e = u - u_exact;
+
+% Norme L2 approximative
+L2 = sqrt(sum(e.^2) * dx);
+
+% Norme L{\infty} (max)
+Linf = max(abs(e));
+
+% Affichage
+fprintf('Erreur L2 = %.3e, Erreur Linf = %.3e\n', L2, Linf);
+
+\end{minted}
+\end{tcolorbox}
+
+En exécutant ce code on obtient:
+\[
+err_{L^{2}}=6.028294 \times 10^{-4}
+\]
+\[
+err_{L^{\infty}}=3.023376\times 10^{-3}
+\]
+
+Cette erreur est considérée négligeable. La méthode numérique assure donc une bonne approximation de la solution exacte.\cite{MathWorksNumericalMethods}
+
+\pagebreak
+\section{Stockage des codes LaTeX \& MATLAB sur GitHub}
+\label{sec:GITHUB}
+Pour assurer une gestion efficace du code et des résultats, un \href{https://www.github.com}{\textcolor{blue}{dépôt GitHub}} a été créé. Cela permet de centraliser tous les fichiers du projet, d'assurer la traçabilité des modifications et de faciliter le partage avec les collaborateurs.
+
+Le dépôt est structuré de manière claire :
+
+\begin{tcolorbox}[colback=gray!5, colframe=black, width=1\textwidth]
+\begin{verbatim}
+Projet_EDP/
+|-- Code/          % Scripts MATLAB
+|-- Figures/       % Graphiques et animations
+|-- Rapports/      % Fichiers LaTeX, PDF et references.bib
+|-- Data/          % Données expérimentales ou simulations
+|-- Diaporama/     % presentation.pdf,pptx (Beamer,PowerPoint)
+|
+|-- README.md      % Présentation du projet
+\end{verbatim}
+
+\end{tcolorbox}
+
+L’utilisation de GitHub permet :
+\begin{itemize}
+    \item La collaboration entre plusieurs étudiants ou chercheurs;
+    \item Le suivi des modifications;
+    \item Le partage des codes et des résultats avec transparence;
+    \item L’intégration avec des plateformes CI/CD pour automatiser certaines simulations ou analyses.
+\end{itemize}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Capture d’écran 2025-12-13 183507.png} 
+    \caption{Github}
+\end{figure}
+
+
+
+\newpage
+
+
+\section{Interactions PDF \& inclusion d'une présentation}
+Le PDF contient des interactions visant la facilitation de la navigation à travers le document. Ces interactions sont principalement les suivantes:
+\begin{itemize}
+    \item La section \hyperref[sec:TOC]{\textcolor{blue}{Table des Matières}} permet de cliquer sur chaque titre pour accéder à sa page;
+    \item La section \hyperref[sec:VDS]{\textcolor{blue}{Visualisation des solutions}} contient des liens cliquables avant chaque image renvoyant vers le code générant cette dernière;
+    \item La section \hyperref[sec:GITHUB]{\textcolor{blue}{GitHub}} contient un lien cliquable renvoyant vers la page GitHub associée à ce projet;
+    \item Cette section dans le PDF contient un lien cliquable vers chaque partie interactive mentionnée.
+\end{itemize}
+
+De plus un document Beamer à été crée pour ce projet, visant à faciliter la présentation de ce projet par Google meet ou datashow en temps réel.
+
+\clearpage
+\newpage
+\thispagestyle{empty}
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+Ce projet nous a permis de montrer comment les Technologies de l’Information et de la Communication peuvent jouer un rôle essentiel dans la modélisation, la résolution et la diffusion scientifique particulièrement autour de l'étude d'une équation aux dérivées partielles. À travers l’étude de l’équation de la chaleur, nous avons illustré comment un problème physique peut être traduit en un modèle mathématique, puis approché numériquement grâce à la méthode des différences finies.
+
+L’utilisation de MATLAB a facilité la mise en œuvre pratique des schémas de résolution, tout en offrant la possibilité de visualiser clairement l’évolution de la température dans le domaine étudié. La comparaison entre la solution exacte et la solution numérique a permis d’évaluer la qualité de l’approximation et de mettre en évidence la cohérence et les limites du schéma choisi.
+
+Sur le plan collaboratif et documentaire, l’intégration des TIC comme GitHub et Overleaf a offert un environnement complet pour partager les codes, automatiser la production du rapport scientifique en LaTeX et structurer un espace de travail commun. Cela montre que les TIC ne sont pas seulement des outils de calcul, mais aussi des supports essentiels pour organiser, tracer et communiquer une démarche scientifique rigoureuse.
+
+En finalité, ce projet illustre l’intérêt des TIC dans la pratique des mathématiques : elles permettent de relier théorie et expérimentation numérique, améliorent la compréhension conceptuelle grâce aux visualisations interactives, et renforcent les compétences collaboratives indispensables dans un contexte scientifique moderne.
+
+\clearpage
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{Références}
+\cite{CanvaFeatures}
+\cite{FDM_Chaleur}
+\cite{GeoGebraHome}
+\cite{GoogleColab}
+\cite{JupyterAbout}
+\cite{MathWorksNumericalMethods}
+\cite{MathWorksSolutions}
+\cite{MemoireChaleur}
+\cite{OverleafFeatures}
+\cite{PythonAbout}
+\cite{TIC_LocalGlobal}
+\cite{WhyGitHub}
+\cite{ZoteroHome}
+\end{document}
